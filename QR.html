@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url(https://miro.medium.com/v2/resize:fit:1400/1*AqkX4oIyzSlO_hVvhEG_OA.png);
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 300px;
+            border: 2px solid #202124;
+            border-radius: 7px;
+            font-size: 20px;
+            
+        }
+
+        .data{
+
+            width: 100%;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        
+
+        button {
+    position: relative;
+    padding: 16px 40px;
+    margin-top: 35px;
+    border-radius: 7px;
+    border: 1px solid #ffbd2d;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background: #202124;
+    color: #ffbd2d;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+  }
+  
+  button:hover {
+    background: #202124;
+    box-shadow: 0 0 30px 5px #202124;
+    color: #ffbd2d;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+  }
+  
+  button:hover::before {
+    -webkit-animation: sh02 0.5s 0s linear;
+    -moz-animation: sh02 0.5s 0s linear;
+    animation: sh02 0.5s 0s linear;
+  }
+  
+  button::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 50px 30px #fff;
+    -webkit-transform: skewX(-20deg);
+    -moz-transform: skewX(-20deg);
+    -ms-transform: skewX(-20deg);
+    -o-transform: skewX(-20deg);
+    transform: skewX(-20deg);
+  }
+  
+  @keyframes sh1002 {
+    from {
+      opacity: 0;
+      left: 0%;
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      left: 100%;
+    }
+  }
+  
+  button:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+  }
+
+        #qrcode {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            /* border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="data">
+    <input type="text" id="inputData" placeholder="Enter data">
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <br><br></div>
+    <div id="qrcode"></div>
+
+    <script>
+        function generateQRCode() {
+            var data = document.getElementById("inputData").value;
+            var qrCodeDiv = document.getElementById("qrcode");
+
+            if (data === '') {
+                alert('Please enter some data');
+            } else {
+                var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(data) + '&size=200x200';
+
+                qrCodeDiv.innerHTML = '<img src="' + qrCodeUrl + '" alt="QR Code">';
+            }
+        }
+    </script>
+</body>
+</html>
